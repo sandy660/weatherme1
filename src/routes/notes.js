@@ -11,11 +11,11 @@ function handleResponseWeather(response) {
     return response.data
 }
 
-router.get('/notes/add', isAuthenticated, (req, res) => {
+router.get('/notes/add', (req, res) => {
     res.render('notes/new-note');
 });
 
-router.post('/notes/new-note', isAuthenticated, async (req, res) => {
+router.post('/notes/new-note', async (req, res) => {
     const { title } = req.body;
     const errors = [];
 
@@ -39,7 +39,7 @@ router.post('/notes/new-note', isAuthenticated, async (req, res) => {
 
 });
 
-router.get('/notes', isAuthenticated, async (req, res) => {
+router.get('/notes', async (req, res) => {
     const notes = await Note.find({ user: req.user.id });
     const ari = {
         notes: notes.map(document => {
@@ -66,7 +66,7 @@ router.get('/notes', isAuthenticated, async (req, res) => {
 });
 
 
-router.delete('/notes/delete/:id', isAuthenticated, async (req, res) => {
+router.delete('/notes/delete/:id', async (req, res) => {
     await Note.findByIdAndDelete(req.params.id);
     req.flash('success_msg', 'Note delete successfully');
     res.redirect('/notes');
