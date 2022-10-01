@@ -53,7 +53,7 @@ router.get('/notes', isAuthenticated, async (req, res) => {
     for (let note of ari.notes) {
 
         const cityInfo = await axios.get('https://api.openweathermap.org/data/2.5/weather?q=' + note.title + '&appid=' + key).then(handleResponseWeather).catch(console.error);
-        const weatherInfo = await axios.get('http://api.openweathermap.org/data/2.5/onecall?lat=' + cityInfo.coord.lat + '&lon=' + cityInfo.coord.lon + '&exclude=hourly,minutely&units=metric&appid=' + key).then(handleResponseWeather).catch(console.error);
+        const weatherInfo = await axios.get('https://api.openweathermap.org/data/2.5/onecall?lat=' + cityInfo.coord.lat + '&lon=' + cityInfo.coord.lon + '&exclude=hourly,minutely&units=metric&appid=' + key).then(handleResponseWeather).catch(console.error);
         note.timeZone = weatherInfo.timezone;
         note.countryCode = cityInfo.sys.country;
         note.imgCode = weatherInfo.current.weather[0].icon;
