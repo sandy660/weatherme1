@@ -28,6 +28,20 @@ app.engine('.hbs', exphbs.engine({
 app.set('view engine', '.hbs');
 
 //Middleware (funciones que se ejecutan antes de llegar al servidor)
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type', 'Access-Control-Allow-Origin', 'Origin');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+        return;
+    }
+
+    next();
+});
+
 app.use(express.urlencoded({
     extended: false
 }));

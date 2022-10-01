@@ -5,7 +5,6 @@ const router = express.Router();
 const user = require('../models/User');
 const passport = require('passport');
 
-
 router.get('/users/signin', (req, res) => {
     res.render('users/signin');
 });
@@ -38,7 +37,6 @@ router.post('/users/signup', async (req, res) => {
         req.flash('success_msg', 'You are registered');
         res.redirect('/users/signin');
     }
-
 });
 
 router.get('/users/logout', (req, res) => {
