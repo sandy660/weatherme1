@@ -51,7 +51,6 @@ router.get('/notes', isAuthenticated, async (req, res) => {
     }
 
     for (let note of ari.notes) {
-
         const cityInfo = await axios.get('https://api.openweathermap.org/data/2.5/weather?q=' + note.title + '&appid=' + key).then(handleResponseWeather).catch(console.error);
         const weatherInfo = await axios.get('https://api.openweathermap.org/data/2.5/onecall?lat=' + cityInfo.coord.lat + '&lon=' + cityInfo.coord.lon + '&exclude=hourly,minutely&units=metric&appid=' + key).then(handleResponseWeather).catch(console.error);
         note.timeZone = weatherInfo.timezone;
@@ -60,8 +59,6 @@ router.get('/notes', isAuthenticated, async (req, res) => {
         note.dayTemp = weatherInfo.daily[0].temp.day;
         note.nightTemp = weatherInfo.daily[0].temp.night;
     }
-
-    console.log(ari.notes);
     res.render('notes/all-notes', { notes: ari.notes })
 });
 

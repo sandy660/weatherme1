@@ -12,7 +12,6 @@ const NoteSchema = new Schema({
     },
     user: {
         type: String,
-
     }
 
 });
