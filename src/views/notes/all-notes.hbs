@@ -1,30 +1,29 @@
-<div class="row">
+<div class="row mt-4 ml-4">
     {{#each notes}}
     <div class="col-md-3">
-        <div class="card">
+        <div class="card bg-light border-secondary">
             <div class="card-body">
                 <h4 class="card-title d-flex justify-content-between align-items-center" id="city-name">
                     {{ title }}
                 </h4>
 
                 <div class="">
-                    <div class="">
-                        <div class="" id="time-zone">{{ timeZone }}</div>
-                        <div id="country" class="">{{ countryCode }}</div>
-                    </div>
-                    <div class="">
-
-                        <div class="" id="current-weather-items">
-
-                            <img src="http://openweathermap.org/img/wn/{{ imgCode }}.png" alt="weather icon"
-                                class="w-icon">
-                            <div class="temp">Night - {{nightTemp}}°C</div>
-                            <div class="temp">Day - {{dayTemp}}°C</div>
-
+                    <div class="row justify-content-between">
+                        <img src="http://openweathermap.org/img/wn/{{ imgCode }}.png" alt="weather icon" width="80"
+                            height="80" class="col-xs-12">
+                        <div class="col-xs-12 mr-4">
+                            <div class="text-right" id="time-zone">{{ timeZone }}</div>
+                            <div id="country" class="text-right">{{ countryCode }}</div>
                         </div>
                     </div>
-                </div>
 
+                    <div class="" id="current-weather-items">
+                        <div class="text-center">Night - {{nightTemp}}°C</div>
+                        <div class="text-center">Day - {{dayTemp}}°C</div>
+                    </div>
+
+                </div>
+                <br>
                 <form action="/notes/delete/{{id}}?_method=DELETE" method="post">
                     <input type="hidden" name="_method" value="DELETE">
                     <button class="btn btn-danger btn-block btn-sm" type="submit">Delete</button>
@@ -37,9 +36,9 @@
         <div class="card-body">
             <h1>Hello {{user.name}}</h1>
             <p class="lead">
-                No hay ciudades.
+                No cities.
             </p>
-            <a href="/notes/add" class="btn btn-success btn-block">Cree una!</a>
+            <a href="/notes/add" class="btn btn-success btn-block">Add one!</a>
         </div>
     </div>
 
